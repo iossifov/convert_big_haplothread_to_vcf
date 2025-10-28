@@ -34,7 +34,9 @@ person_tuple = {t.indId:t for t in MT.itertuples(index=False)}
 
 child_haps_idx: dict[tuple[str, str, str], dict[str, int]] = defaultdict(dict)
 for h_idx, (fm_id, p_id, h_id, _) in enumerate(RD):
-    m_id, f_id = fm_id.split("_")
+    atts = eval(person_tuple[p_id].atts)
+    m_id = atts['mom']
+    f_id = atts['dad']
     child_haps_idx[m_id, f_id, p_id][h_id] = h_idx
 for hd in child_haps_idx.values():
     assert len(hd) == 4

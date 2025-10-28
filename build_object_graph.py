@@ -22,5 +22,10 @@ def run(proj: Project, OG: ObjectGraph):
         number_of_positions = int(line_count_str)-1
         n_bins = math.ceil(number_of_positions / bin_size)
 
+        chrom_chunk_os = []
         for chunk in range(n_bins):
-            OG.add('chunk', f"{chrom}-{chunk}",{"chrom": chrom, "chunk": chunk}, [in_chrom_o])
+            chrom_chunk_os.append(OG.add('chunk', f"{chrom}-{chunk}",
+                                        {"chrom": chrom, "chunk": chunk},
+                                        [in_chrom_o]))
+
+        OG.add("chris", chrom, {"chrom":chrom}, chrom_chunk_os)

@@ -1,4 +1,4 @@
 source_dir: /mnt/wigclust8/data/safe/autism/HT/AGRE_WG38_AGRE859
 collection: AGRE859
 chromosomes: chr18
-positions_per_bin: 100000
+positions_per_bin: 10000

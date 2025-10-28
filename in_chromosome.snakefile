@@ -8,7 +8,7 @@ rule split:
         source_dir=PP("source_dir"),
         collection=PP("collection"),
         chrom=P("chrom")
-    resources: mem_mb=50*1024
+    resources: mem_mb=100*1024
     shell: '''
         (time split_haplo.py \
                    {params.source_dir} {params.collection} \

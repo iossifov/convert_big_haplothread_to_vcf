@@ -1,5 +1,5 @@
 #snakeobjects 3.1.2
-#Snakeobjects types: ['chunk', 'in_chromosome']
+#Snakeobjects types: ['chris', 'chunk', 'in_chromosome']
 shell.prefix("set -euo pipefail; ")
 from snakeobjects import Project 
 from snakeobjects.snakeUtils import set_project, T, TE, DT, LFS, P, DP, PP, B, EF, add_targets, get_targets
@@ -28,6 +28,15 @@ set_project(project)
 rule so_all_targets:
   input:
     expand("{of}", of=project.get_all_object_flags())
+
+include: "chris.snakefile"
+rule so_all_chris:
+  input:
+    expand("{of}", of=project.get_all_object_flags("chris"))
+
+rule so_chris_obj:
+  input: get_targets("chris")
+  output: touch("chris/{oid}/obj.flag")
 
 include: "chunk.snakefile"
 rule so_all_chunk:
