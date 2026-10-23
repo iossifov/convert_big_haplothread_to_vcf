@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import sys
+import gzip
 
 out_dir = "./individuals"
 vcfs = [
@@ -19,7 +20,7 @@ samples = []
 sample_files = []
 for vcf in vcfs:
     print(f"Processing {vcf}...")
-    with open(vcf,"rt") as V:
+    with gzip.open(vcf,"rt") as V:
         line = ""
         for li,line in enumerate(V):
             if line.startswith("#CHROM"):
@@ -31,7 +32,7 @@ for vcf in vcfs:
         assert not samples or samples == v_samples
         if not samples:
             samples = v_samples
-            sample_files = [open(f"{out_dir}/{sample}-gens.txt", "wt") for sample in samples]
+            sample_files = [gzip.open(f"{out_dir}/{sample}-gens.txt.gz", "wt") for sample in samples]
         for li, line in enumerate(V, li+1):
             if (li % 1000) == 0:
                 print(f"   Working on line {li}")

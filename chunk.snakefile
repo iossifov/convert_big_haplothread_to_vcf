@@ -1,8 +1,14 @@
-add_targets("chunk.vcf")
+add_targets("chunk.vcf.gz")
+
+rule gzip:
+    input: T("chunk.vcf")
+    output: T("chunk.vcf.gz")
+    log: **LFS('gzip')
+    shell: "(time gzip {input} > {log.O} 2> {log.E}) 2> {log.T}"
 
 rule to_vcf:
     input: DT("split.flag")
-    output: T("chunk.vcf")
+    output: temp(T("chunk.vcf"))
     log: **LFS('to_vcf')
     resources: mem_mb=1024
     params:
@@ -12,6 +18,7 @@ rule to_vcf:
 
     shell: '''
         (
+           ulimit -n 10240
            chrdir=`dirname {input}`
            time \
                haplothread2VCF.py \

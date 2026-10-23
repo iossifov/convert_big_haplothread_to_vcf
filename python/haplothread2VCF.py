@@ -11,7 +11,7 @@ from haplo_tools import load_haplothread_file
 
 in_data_dir = "/mnt/wigclust8/data/safe/autism/HT/AGRE_WG38_AGRE859"
 coll = "AGRE859"
-chrom = "chr18"
+chrom = "chrX"
 
 meta_data_file = f"{in_data_dir}/metaData.txt"
 in_pos_file = f"{in_data_dir}/{coll}-{chrom}-pos.txt"
